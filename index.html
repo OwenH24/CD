@@ -1,0 +1,728 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Just for Chloe ♡</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500;600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --pink: #e783a0;
+  --deep: #8e3558;
+  --cream: #fff8f5;
+  --pale: #ffe8ee;
+  --ink: #66364b;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Quicksand', sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse at 10% 10%, #ffd9e5 0, transparent 38%),
+    radial-gradient(ellipse at 90% 90%, #ffd1df 0, transparent 40%),
+    linear-gradient(135deg, #fffaf7, #ffeaf0, #fff6f4);
+  overflow-x: hidden;
+}
+
+button, input { font: inherit; }
+
+button { cursor: pointer; }
+
+button:focus-visible, input:focus-visible {
+  outline: 3px solid #b84f77;
+  outline-offset: 3px;
+}
+
+.screen {
+  min-height: 100vh;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+.screen.active { display: flex; animation: appear .65s ease; }
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.panel {
+  width: min(100%, 490px);
+  padding: 38px 28px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 250, 248, .83);
+  border: 1px solid rgba(222, 137, 165, .5);
+  border-radius: 24px;
+  box-shadow: 0 16px 55px rgba(139, 58, 88, .12);
+  backdrop-filter: blur(7px);
+}
+
+h1, h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  color: var(--deep);
+}
+
+h1 { font-size: clamp(2rem, 7vw, 2.8rem); margin: 0 0 12px; }
+h2 { font-size: clamp(1.4rem, 5vw, 1.8rem); }
+
+.subtitle { line-height: 1.8; font-size: .95rem; }
+
+.heart-divider {
+  color: var(--pink);
+  letter-spacing: 7px;
+  margin: 15px 0 22px;
+}
+
+.flower-corner {
+  position: absolute;
+  font-size: clamp(45px, 10vw, 85px);
+  opacity: .72;
+  pointer-events: none;
+  filter: drop-shadow(0 3px 5px #e7a5b5);
+}
+.top-left { top: 8px; left: 8px; transform: rotate(-25deg); }
+.top-right { top: 8px; right: 8px; transform: rotate(25deg); }
+.bottom-left { bottom: 8px; left: 8px; transform: rotate(15deg); }
+.bottom-right { bottom: 8px; right: 8px; transform: rotate(-15deg); }
+
+.field {
+  display: block;
+  text-align: left;
+  margin: 18px 0;
+  font-weight: 600;
+  font-size: .9rem;
+}
+
+.field input {
+  width: 100%;
+  padding: 15px;
+  margin-top: 8px;
+  border: 1px solid #e8b3c4;
+  border-radius: 12px;
+  background: #fffdfc;
+  color: var(--ink);
+}
+
+.btn {
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 13px 20px;
+  transition: transform .2s, box-shadow .2s, background .2s;
+  font-weight: 700;
+}
+
+.btn:hover { transform: translateY(-2px); }
+
+.primary {
+  background: linear-gradient(135deg, #ee91ad, #d96d91);
+  color: white;
+  box-shadow: 0 6px 16px #df91aa45;
+}
+
+.primary:hover { box-shadow: 0 8px 22px #d96d9160; }
+
+.full { width: 100%; margin-top: 12px; }
+
+.success-mark {
+  width: 82px;
+  height: 82px;
+  margin: 0 auto 18px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #e0f3e4;
+  color: #348957;
+  border: 2px solid #8ac99c;
+  font-size: 3rem;
+  animation: pop .5s ease;
+}
+
+@keyframes pop {
+  0% { transform: scale(.3); }
+  70% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+.question-number {
+  text-transform: uppercase;
+  font-size: .75rem;
+  letter-spacing: 3px;
+  color: #bc718c;
+  font-weight: 700;
+}
+
+.question {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.35rem, 5vw, 1.8rem);
+  line-height: 1.5;
+  margin: 18px 0 25px;
+}
+
+.answers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.answer {
+  padding: 15px 9px;
+  border: 1px solid #e7a6ba;
+  border-radius: 12px;
+  background: #fffaf9;
+  color: var(--ink);
+  transition: .2s;
+}
+
+.answer:hover {
+  background: #fce0e8;
+  transform: translateY(-2px);
+}
+
+.back-link {
+  background: transparent;
+  border: 0;
+  color: #98667b;
+  text-decoration: underline;
+  margin-top: 25px;
+  font-size: .85rem;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background: #43232dbb;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal.show { display: flex; animation: appear .2s ease; }
+
+.modal-card {
+  width: min(100%, 360px);
+  background: #fff8f6;
+  border: 1px solid #e5a2b8;
+  border-radius: 22px;
+  padding: 30px 24px;
+  text-align: center;
+  box-shadow: 0 15px 55px #35152340;
+}
+
+.modal-card .symbol { font-size: 2.5rem; }
+.modal-card h2 { margin: 12px 0; font-size: 1.6rem; }
+.modal-card p { line-height: 1.7; }
+.modal-card button { min-width: 120px; }
+
+/* The big question */
+.proposal-panel {
+  background: rgba(255, 248, 247, .72);
+  border-color: #efb2c6;
+}
+
+.proposal-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(4rem, 15vw, 7.3rem);
+  line-height: 1.2;
+  color: #c6537b;
+  margin: 20px 0;
+}
+
+.lily-sprinkle {
+  font-size: 2rem;
+  letter-spacing: 10px;
+  animation: sway 3s ease-in-out infinite;
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(-4deg); }
+  50% { transform: rotate(4deg); }
+}
+
+.proposal-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.no-btn {
+  background: #fffaf8;
+  border: 1px solid #e5a4ba;
+  color: var(--deep);
+  min-width: 100px;
+}
+
+.yes-btn {
+  background: linear-gradient(135deg, #ed83a4, #cf537f);
+  color: white;
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.3rem;
+  padding: 12px 20px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px #d968904c;
+  animation: heartbeat 1.8s infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  10% { transform: scale(1.035); }
+  20% { transform: scale(1); }
+}
+
+/* The letter */
+#letter-screen {
+  align-items: flex-start;
+  padding: 25px 14px 50px;
+  background:
+    radial-gradient(ellipse at 10% 10%, #ffc5d8 0, transparent 32%),
+    radial-gradient(ellipse at 95% 75%, #ffcada 0, transparent 35%),
+    linear-gradient(145deg, #fff5f5, #ffe5eb 50%, #fff8f1);
+}
+
+.letter-wallpaper {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: .86;
+}
+
+.decor {
+  position: absolute;
+  font-size: clamp(28px, 6vw, 58px);
+  filter: drop-shadow(0 3px 4px #c8758d30);
+}
+
+.d1 { top: 2%; left: 2%; }
+.d2 { top: 12%; right: 4%; }
+.d3 { top: 35%; left: 1%; }
+.d4 { top: 55%; right: 2%; }
+.d5 { bottom: 8%; left: 4%; }
+.d6 { bottom: 3%; right: 5%; }
+.d7 { top: 75%; left: 2%; }
+.d8 { top: 27%; right: 2%; }
+.d9 { bottom: 32%; left: 4%; }
+.d10 { bottom: 20%; right: 3%; }
+
+.letter {
+  width: min(100%, 800px);
+  margin: 0 auto;
+  padding: clamp(26px, 6vw, 66px);
+  position: relative;
+  z-index: 2;
+  border: 1px solid #e9b4c3;
+  border-radius: 5px;
+  box-shadow: 0 18px 65px #984c6930;
+  background: rgba(255, 250, 247, .9);
+}
+
+.letter h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(2.8rem, 9vw, 4.7rem);
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.letter-subtitle {
+  text-align: center;
+  color: #b76a85;
+  font-size: .85rem;
+  letter-spacing: 3px;
+  margin-bottom: 30px;
+}
+
+.letter-body {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(1.3rem, 3.5vw, 1.75rem);
+  line-height: 1.75;
+  color: #63374a;
+}
+
+.letter-body p { margin: 0 0 20px; }
+
+.letter-body strong {
+  font-family: 'Playfair Display', serif;
+  font-size: .75em;
+  color: #a4486c;
+  font-weight: 600;
+}
+
+.signature {
+  text-align: center;
+  font-family: 'Great Vibes', cursive;
+  color: #c04d78;
+  font-size: clamp(2rem, 7vw, 3.4rem);
+  margin-top: 35px;
+}
+
+.signature span {
+  display: block;
+  margin-top: 14px;
+  font-size: .8em;
+}
+
+.letter-footer {
+  text-align: center;
+  margin-top: 25px;
+  color: #bd7890;
+}
+
+@media (max-width: 420px) {
+  .panel { padding: 32px 19px; }
+  .answers { gap: 9px; }
+  .answer { padding: 14px 5px; font-size: .88rem; }
+  .proposal-buttons { gap: 9px; }
+  .yes-btn { padding: 10px 14px; }
+  .no-btn { min-width: 80px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- WELCOME -->
+<section class="screen active" id="welcome">
+  <span class="flower-corner top-left">🌸</span>
+  <span class="flower-corner top-right">🌷</span>
+  <span class="flower-corner bottom-left">🌷</span>
+  <span class="flower-corner bottom-right">🌸</span>
+
+  <div class="panel">
+    <h1>Welcome, my love</h1>
+    <div class="heart-divider">♡ ── ♥ ── ♡</div>
+    <p class="subtitle">Before we begin, let's make sure it's really you.</p>
+
+    <form id="name-form">
+      <label class="field">
+        First name
+        <input id="first-name" type="text" placeholder="Your first name"
+               autocomplete="given-name" required>
+      </label>
+      <label class="field">
+        Last name
+        <input id="last-name" type="text" placeholder="Your last name"
+               autocomplete="family-name">
+      </label>
+      <button class="btn primary full" type="submit">Continue ♡</button>
+    </form>
+    <p style="font-size:.8rem;margin-top:22px;color:#b77c91">
+      A little something made just for you
+    </p>
+  </div>
+</section>
+
+<!-- NAME VERIFIED -->
+<section class="screen" id="verified">
+  <div class="panel">
+    <div class="success-mark">✓</div>
+    <h1>It's you!</h1>
+    <p class="subtitle">I knew you'd make it, Chloe. ♡</p>
+    <button class="btn primary full" id="start-questions">Let's begin</button>
+  </div>
+</section>
+
+<!-- SECURITY QUESTIONS -->
+<section class="screen" id="quiz">
+  <span class="flower-corner top-left">🌸</span>
+  <span class="flower-corner bottom-right">🌷</span>
+  <div class="panel">
+    <div class="question-number" id="question-count">Question 1 of 5</div>
+    <h1 style="font-size:2rem">Security Questions</h1>
+    <div class="heart-divider">♡ ── ♥ ── ♡</div>
+    <div class="question" id="question-text"></div>
+    <div class="answers" id="answer-buttons"></div>
+    <button class="back-link" id="quiz-back">← Back to start</button>
+  </div>
+</section>
+
+<!-- GIRLFRIEND QUESTION -->
+<section class="screen" id="proposal">
+  <span class="flower-corner top-left">🌷</span>
+  <span class="flower-corner top-right">🌸</span>
+  <span class="flower-corner bottom-left">🌸</span>
+  <span class="flower-corner bottom-right">🌷</span>
+
+  <div class="panel proposal-panel">
+    <div class="lily-sprinkle">🌸 🪷 🌸</div>
+    <div class="proposal-title">Girlfriend?</div>
+    <div class="heart-divider">♡ ── ♥ ── ♡</div>
+    <p class="subtitle">There's only one answer I'm hoping for...</p>
+
+    <div class="proposal-buttons">
+      <button class="btn no-btn" id="no-button">No 🙈</button>
+      <button class="btn yes-btn" id="yes-button">🌵 Yes 🌵</button>
+    </div>
+    <p style="font-size:.82rem;margin-top:25px">Choose wisely, my CD. ♡</p>
+  </div>
+</section>
+
+<!-- THE LETTER -->
+<section class="screen" id="letter-screen">
+  <div class="letter-wallpaper" aria-hidden="true">
+    <span class="decor d1">🌸</span>
+    <span class="decor d2">🐧</span>
+    <span class="decor d3">🌷</span>
+    <span class="decor d4">🍸</span>
+    <span class="decor d5">🐧</span>
+    <span class="decor d6">🌸</span>
+    <span class="decor d7">🍋</span>
+    <span class="decor d8">🌺</span>
+    <span class="decor d9">🍸</span>
+    <span class="decor d10">🐧</span>
+  </div>
+
+  <article class="letter">
+    <h1>Chloe, CD, Chlo</h1>
+    <div class="letter-subtitle">A LETTER FROM MY HEART ♡</div>
+
+    <div class="letter-body">
+      <p>Whether this is the first time you've said "yes" or simply something you've revisited, one thing has never changed. How I feel about you. If anything, those feelings have only grown stronger. Words will never fully describe how much I love and appreciate you, but I still want to try.</p>
+
+      <p>When we first met on <strong>08/08/2024</strong> (even though you still insist you saw me as a lifeguard before then, which remains unproven), I never imagined where our story would lead. I was on the mid shift (Classic), you were on the late shift, and when that coffee bean ended up in your bra. From that moment, we became best friends.</p>
+
+      <p>I knew we would have a special bond, but I never imagined one day I'd be lucky enough to call you my girlfriend. I'm so grateful that I can.</p>
+
+      <p>I am incredibly proud of the woman you've become, and I'm excited for everything that our future holds. As I'm writing this on <strong>28/10/2026 at 11:11pm</strong>, I can't help but think how worth it every second of making this has been, because it's for you.</p>
+
+      <p>I promise to love you through every high and every low. No matter what happens, you'll always have Me. Someone to lean on, someone to listen, and someone who will always have your back.</p>
+
+      <p>I'll never forget the cleaning cupboard where the flirting began, or Topgolf where the interest started 👀. Then came the pub trips with the work group, the night I saw a shooting star and wished for "Chloe Darke", and finally our first kiss on <strong>05/06/2026 at 2:20am</strong>. It remains one of the happiest moments of my life.</p>
+
+      <p>Then came our first sleepover on <strong>04/07/2026</strong>, followed by our first proper date in Windsor. Even though it was followed by a trip to A&amp;E the next morning, it was still perfect.</p>
+
+      <p>Or at least it was until <strong>11/09/2026</strong>, the best weekend of my life. Our London weekend together, visiting London Zoo and eating at Tapas Stories, is a memory I'll always treasure.</p>
+
+      <p>I know gift-giving isn't your love language, but seeing the happy tears when I gave you the Coffee Bean Jellycat and the stone giraffe on <strong>18/09/2026</strong> meant more to me than any gift I could ever receive. Making you happy will always be one of my favourite things.</p>
+
+      <p>And now we've booked our first holiday together to Edinburgh, which I'm sure will become another unforgettable chapter in our story.</p>
+
+      <p>I'm sorry if this has turned into a bit of a ramble, but when it comes to you, I could talk forever.</p>
+
+      <p>You are the most beautiful girl I've ever known, Also the kindness, love and the very rare funny joke you give me (Kidding you're pretty funny) shows me you are the girl I have always wanted. Thank you for loving me the way you do. I promise I'll spend every day loving you just as much in return.</p>
+    </div>
+
+    <div class="signature">
+      Love you, my CD.
+      <span>From O ❤️</span>
+    </div>
+    <div class="letter-footer">Forever and always ♡</div>
+  </article>
+</section>
+
+<!-- POP-UP -->
+<div class="modal" id="modal" role="dialog"
+     aria-modal="true" aria-labelledby="modal-title"
+     aria-describedby="modal-message">
+  <div class="modal-card">
+    <div class="symbol" id="modal-symbol">♡</div>
+    <h2 id="modal-title">A little message</h2>
+    <p id="modal-message"></p>
+    <button class="btn primary" id="modal-ok">Okay ♡</button>
+  </div>
+</div>
+
+<script>
+const screens = document.querySelectorAll('.screen');
+const modal = document.getElementById('modal');
+const modalTitle = document.getElementById('modal-title');
+const modalMessage = document.getElementById('modal-message');
+const modalSymbol = document.getElementById('modal-symbol');
+const modalOK = document.getElementById('modal-ok');
+
+let modalAction = null;
+let questionIndex = 0;
+
+const questions = [
+  {
+    question: "What is Owen's favourite colour?",
+    answers: ["Red", "Black", "Orange", "Yellow"],
+    correct: "Orange"
+  },
+  {
+    question: "What did Owen throw down Chloe's top the first time meeting?",
+    answers: ["Coffee Bean", "Ice", "A Pen", "Name badge"],
+    correct: "Coffee Bean"
+  },
+  {
+    question: "What animal does Chloe say Owen looks like?",
+    answers: ["Turtle", "meerkat", "Giraffe", "Nemo"],
+    correct: "Giraffe"
+  },
+  {
+    question: "When was Owen and Chloe's First kiss",
+    answers: [
+      "05/06/26 Around 01:20AM",
+      "05/06/26 Around 02:20AM",
+      "05/06/26 Around 03:20AM",
+      "05/06/26 Around 04:20AM"
+    ],
+    correct: "05/06/26 Around 02:20AM"
+  },
+  {
+    question: "Who said I love you first?",
+    answers: ["Chloe", "Owen"],
+    correct: "Chloe"
+  }
+];
+
+function showScreen(id) {
+  screens.forEach(screen => screen.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function popup(title, message, symbol = "♡", action = null) {
+  modalTitle.textContent = title;
+  modalMessage.textContent = message;
+  modalSymbol.textContent = symbol;
+  modalAction = action;
+  modal.classList.add('show');
+  modalOK.focus();
+}
+
+function closePopup() {
+  modal.classList.remove('show');
+  const action = modalAction;
+  modalAction = null;
+  if (action) action();
+}
+
+modalOK.addEventListener('click', closePopup);
+
+modal.addEventListener('click', event => {
+  if (event.target === modal) closePopup();
+});
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && modal.classList.contains('show')) {
+    closePopup();
+  }
+});
+
+// Name check
+document.getElementById('name-form').addEventListener('submit', event => {
+  event.preventDefault();
+
+  const first = document.getElementById('first-name').value.trim();
+  const last = document.getElementById('last-name').value.trim();
+
+  if (first.toLowerCase() === 'chloe' && !last) {
+    popup(
+      "Hmmm maybe...",
+      "Hmmm maybe, Whats the last name",
+      "🤔"
+    );
+    document.getElementById('last-name').focus();
+    return;
+  }
+
+  const validSurname = ['darke', 'haywood'].includes(last.toLowerCase());
+
+  if (first.toLowerCase() === 'chloe' && validSurname) {
+    showScreen('verified');
+    return;
+  }
+
+  popup(
+    "Hmm, try again!",
+    "That doesn't look quite right. Have another go, lovely.",
+    "🌸"
+  );
+});
+
+document.getElementById('start-questions').addEventListener('click', () => {
+  questionIndex = 0;
+  renderQuestion();
+  showScreen('quiz');
+});
+
+function renderQuestion() {
+  const current = questions[questionIndex];
+
+  document.getElementById('question-count').textContent =
+    `Question ${questionIndex + 1} of ${questions.length}`;
+
+  document.getElementById('question-text').textContent = current.question;
+
+  const container = document.getElementById('answer-buttons');
+  container.replaceChildren();
+
+  current.answers.forEach(answer => {
+    const button = document.createElement('button');
+    button.className = 'answer';
+    button.textContent = answer;
+    button.addEventListener('click', () => checkAnswer(answer));
+    container.appendChild(button);
+  });
+}
+
+function checkAnswer(answer) {
+  const current = questions[questionIndex];
+
+  if (answer !== current.correct) {
+    popup(
+      "Imposter detected",
+      "Hmmmm... that's not quite right. Back to the beginning!",
+      "🚨",
+      () => {
+        document.getElementById('name-form').reset();
+        showScreen('welcome');
+      }
+    );
+    return;
+  }
+
+  questionIndex++;
+
+  if (questionIndex < questions.length) {
+    renderQuestion();
+  } else {
+    showScreen('proposal');
+  }
+}
+
+document.getElementById('quiz-back').addEventListener('click', () => {
+  document.getElementById('name-form').reset();
+  showScreen('welcome');
+});
+
+document.getElementById('no-button').addEventListener('click', () => {
+  popup(
+    "Whoops!",
+    "Whoops, must of slipped",
+    "🌷",
+    () => showScreen('proposal')
+  );
+});
+
+document.getElementById('yes-button').addEventListener('click', () => {
+  showScreen('letter-screen');
+});
+</script>
+</body>
+</html>
