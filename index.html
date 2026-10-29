@@ -642,6 +642,160 @@ h2 { font-size: clamp(1.4rem, 5vw, 1.8rem); }
     transition-duration: .01ms !important;
   }
 }
+  
+/* ===== KHAKI & CHOCOLATE THEME ===== */
+
+:root {
+  --pink: #C6A6A0;
+  --deep: #4B3629;
+  --cream: #F5F1E7;
+  --pale: #E5E3D2;
+  --ink: #382C24;
+}
+
+/* Main wallpaper */
+body {
+  background:
+    radial-gradient(
+      ellipse at top left,
+      #B8B99B 0%,
+      transparent 48%
+    ),
+    linear-gradient(
+      140deg,
+      #A3A681,
+      #B5B69A 55%,
+      #979B78
+    );
+  color: var(--ink);
+}
+
+/* Main cards */
+.panel,
+.proposal-panel {
+  background: rgba(245, 241, 231, 0.96);
+  border: 1px solid #D1CEB8;
+  box-shadow: 0 18px 55px rgba(55, 43, 31, 0.12);
+  border-radius: 18px;
+}
+
+/* Headings */
+h1, h2 {
+  color: var(--deep);
+}
+
+/* Buttons */
+.primary,
+.yes-btn {
+  background: #4B3629;
+  color: #F5F1E7;
+  border: 1px solid #4B3629;
+  box-shadow: none;
+}
+
+.primary:hover,
+.yes-btn:hover {
+  background: #634B39;
+}
+
+/* Secondary buttons */
+.no-btn {
+  background: #F5F1E7;
+  color: #4B3629;
+  border: 1px solid #A3A681;
+}
+
+/* Inputs */
+.field input {
+  background: #FBF9F3;
+  color: #382C24;
+  border: 1px solid #C7C5AD;
+}
+
+.field input:focus {
+  border-color: #7D8060;
+}
+
+/* Security answer buttons */
+.answer {
+  background: #FBF9F3;
+  color: #382C24;
+  border: 1px solid #D1CEB8;
+}
+
+.answer:hover {
+  background: #E8E7D9;
+  border-color: #7D8060;
+}
+
+/* Dividers and question labels */
+.heart-divider,
+.question-number,
+.back-link {
+  color: #7D8060;
+}
+
+/* Girlfriend heading */
+.proposal-title {
+  font-family: 'DM Sans', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  color: #4B3629;
+}
+
+/* Letter wallpaper */
+#letter-screen {
+  background:
+    radial-gradient(
+      ellipse at top left,
+      #B8B99B 0%,
+      transparent 45%
+    ),
+    linear-gradient(
+      140deg,
+      #A3A681,
+      #B5B69A 55%,
+      #979B78
+    );
+}
+
+/* Letter paper */
+.letter {
+  background: rgba(245, 241, 231, 0.97);
+  border: 1px solid #D1CEB8;
+  box-shadow: 0 18px 65px rgba(55, 43, 31, 0.15);
+}
+
+/* Letter typography */
+.letter h1,
+.signature {
+  color: #4B3629;
+}
+
+.letter-body {
+  color: #382C24;
+}
+
+.letter-body strong {
+  color: #634B39;
+}
+
+.letter-subtitle,
+.letter-footer {
+  color: #7D8060;
+}
+
+/* Pop-up messages */
+.modal-card {
+  background: #F5F1E7;
+  border: 1px solid #D1CEB8;
+  color: #382C24;
+}
+
+.modal-card h2 {
+  color: #4B3629;
+}
+
 </style>
 </head>
 
